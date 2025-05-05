@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Employee Details</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>profession</th>
+                <th>Country</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tr th:each="emp:${employees}" >
+            <td th:text="${emp.name}"></td>
+            <td th:text="${emp.email}"></td>
+            <td th:text="${emp.password !=null}?'*****':''"></td>
+            <td th:text="${emp.gender}"></td>
+            <td th:text="${emp.address}"></td>
+            <td th:text="${emp.profession}"></td>
+            <td th:text="${emp.country.name}"></td>
+            <td>
+                <a th:href="@{/login/details/update/{id}(id=${emp.id})}">
+                    <button type="button">Update</button>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/login/details/delete/{id}(id=${emp.id})}">
+                    <button type="button">Delete</button>
+                </a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

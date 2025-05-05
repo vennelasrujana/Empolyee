@@ -1,0 +1,4 @@
+SELECT c.code,ci.name,c.name FROM country c 
+inner join city ci
+on c.code=ci.CountryCode
+where code="AFG";

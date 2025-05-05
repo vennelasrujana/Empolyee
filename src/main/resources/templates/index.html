@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        form{
+            border-style: solid;
+            width: 500px;
+        }
+        label{
+            display: inline-block;
+            width: 200px;
+            margin: 5px;
+            text-align: left;
+        }
+        input[type=text],input[type=email],input[type=password],select{
+            display: inline-block;
+            width: 200px;
+        }
+        input[type=radio]{
+            margin-left: 45px;
+        }
+        button{
+            padding:5px;
+            margin: 10px;
+        }
+        input[type=checkbox]{
+            margin-right: 190px;
+        }
+    </style>
+</head>
+<body>
+    <div align="center">
+
+        <form th:action="${employee.id == null ? '/register' : '/login/details/update/' + employee.id}" method="post" th:object="${employee}">
+            <input type="hidden" name="id" th:field="*{id}">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" th:field="*{name}" required><br>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" th:field="*{email}" required><br>
+            <label for="password">Password</label>
+            <input type="text" name="password" id="password" th:field="*{password}" required><br>
+            <label for="gender">Gender</label>
+            <input type="radio" id="male" name="gender" value="Male" th:field="*{gender}">Male
+            <input type="radio" id="female" name="gender" value="Female" th:field="*{gender}">Female <br>
+            <label for="profession">Profession</label>
+            <select name="profession" id="profession" th:field="*{profession}">
+                <option th:each="p:${profession}" th:text="${p}" th:value="${p}"></option>
+            </select>
+            <br>
+            <label for="country">Country</label>
+            <select name="country" id="country" th:field="*{country}">
+                <option th:each="c:${countries}" th:text="${c.name}" th:value="${c.code}"></option>
+            </select>
+            <br>
+            <label for="city">City</label>
+            <select name="city" id="city" th:field="*{city}">
+                <option th:each="c:${cities}" th:text="${c.name}" th:value="${c.name}"></option>
+            </select>
+            <br>
+            <label for="address">Address</label>
+            <textarea name="address" id="address" cols="25" rows="5" th:field="*{address}"></textarea>
+            <br>
+            <button type="submit">Register</button>
+            <p>Already have account? <a th:href="@{/login}">login</a></p>
+        </form>
+    </div>
+</body>
+</html>
